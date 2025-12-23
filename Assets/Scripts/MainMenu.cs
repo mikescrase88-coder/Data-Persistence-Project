@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEditor;
+using UnityEngine.Android;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class MainMenu : MonoBehaviour
     private void Update()
     {
         playerName = playerNameInput.text;
+        SavePlayerName();
     }
 
     public void SavePlayerName()
@@ -19,5 +22,14 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
        SceneManager.LoadScene(1);
+    }
+    public void Exit()
+    {
+        PlayerData.Instance.SaveHighscore();
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }

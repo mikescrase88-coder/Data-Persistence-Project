@@ -344,9 +344,12 @@ MonoBehaviour:
   BrickPrefab: {fileID: 897975713663390409, guid: 63f25b9733d2bcd4fa2ff6de1264c739, type: 3}
   LineCount: 6
   Ball: {fileID: 177912862}
+  playerName: 
   ScoreText: {fileID: 188020406}
   HighScoreText: {fileID: 2078529056}
   GameOverText: {fileID: 474497238}
+  m_Points: 0
+  highScore: 0
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1390,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2137539498}
     m_Modifications:
+    - target: {fileID: 39158646168988178, guid: 9ecaaa0e5b10b2e4fb3e44d0a38ccc90, type: 3}
+      propertyPath: m_Text
+      value: 'GAME OVER
+
+        Press Space to Restart
+
+        Press Escape to
+        return to Main Menu'
+      objectReference: {fileID: 0}
     - target: {fileID: 6077514958620157099, guid: 9ecaaa0e5b10b2e4fb3e44d0a38ccc90, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

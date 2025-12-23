@@ -10,14 +10,18 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
+    [SerializeField] public string playerName;
+
     public Text ScoreText;
     public Text HighScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
-    private int m_Points;
-    public string playerName;
-    
+    [SerializeField] private int m_Points;
+
+    public int highScore;
+    public string highScoreHolder;
+       
     private bool m_GameOver = false;
 
     void Start()
@@ -34,13 +38,10 @@ public class MainManager : MonoBehaviour
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
                 brick.onDestroyed.AddListener(AddPoint);
-
-                if (PlayerData.Instance != null)
-                {
-                    // start back here, item 8 ------------------------------------------------------------
-                }
             }
         }
+        highScore = PlayerData.Instance.highScore;
+        highScoreHolder = PlayerData.Instance.highScoreHolder;
     }
 
     private void Update()
@@ -65,17 +66,32 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+        HighScoreText.text = "Best Score: " + PlayerData.Instance.highScoreHolder + " -" + highScore;
+        if (m_Points > highScore)
+        {
+           SetHighScore();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = playerName + $"'s Score : {m_Points}";
+        ScoreText.text = PlayerData.Instance.playerName + $"'s Score : {m_Points}";
     }
 
     void SetHighScore()
     {
+        highScore = m_Points;
+        PlayerData.Instance.highScore = highScore;
 
+        highScoreHolder = PlayerData.Instance.playerName;
+        PlayerData.Instance.highScoreHolder = highScoreHolder;
+
+        HighScoreText.text = "Best Score: " + PlayerData.Instance.highScoreHolder + " -" + highScore;
     }
 
     public void GameOver()
