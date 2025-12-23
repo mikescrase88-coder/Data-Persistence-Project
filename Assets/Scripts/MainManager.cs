@@ -11,17 +11,17 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text HighScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
     private int m_Points;
+    public string playerName;
     
     private bool m_GameOver = false;
 
-    
-    // Start is called before the first frame update
     void Start()
-    {
+    {      
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -34,6 +34,11 @@ public class MainManager : MonoBehaviour
                 var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
                 brick.PointValue = pointCountArray[i];
                 brick.onDestroyed.AddListener(AddPoint);
+
+                if (PlayerData.Instance != null)
+                {
+                    // start back here, item 8 ------------------------------------------------------------
+                }
             }
         }
     }
@@ -65,7 +70,12 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = playerName + $"'s Score : {m_Points}";
+    }
+
+    void SetHighScore()
+    {
+
     }
 
     public void GameOver()
