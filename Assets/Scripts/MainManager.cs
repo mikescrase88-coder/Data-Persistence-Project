@@ -42,6 +42,7 @@ public class MainManager : MonoBehaviour
         }
         highScore = PlayerData.Instance.highScore;
         highScoreHolder = PlayerData.Instance.highScoreHolder;
+        ScoreText.text = PlayerData.Instance.playerName + $"'s Score : {m_Points}";
     }
 
     private void Update()
